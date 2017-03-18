@@ -1,10 +1,12 @@
 package com.example.hackertronix.firebaseauthtest;
 
 import android.app.ProgressDialog;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 
 public class Browse extends AppCompatActivity {
 
+    private static final String WALLPAPERS_ARRAY = "wallpapers_array";
     private Typeface SFUI;
 
     private Toolbar toolbar;
@@ -52,15 +55,25 @@ public class Browse extends AppCompatActivity {
 
         wallpapersRecyclerView=(RecyclerView)findViewById(R.id.wallpaper_recyclerview);
 
-        wallpapersRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
-
-        callUnsplash();
+        handleOrientation();
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(Color.WHITE);
 
+        }
+
+        if(savedInstanceState!=null&&savedInstanceState.containsKey(WALLPAPERS_ARRAY))
+        {
+            Wallpapers=savedInstanceState.getParcelableArrayList(WALLPAPERS_ARRAY);
+            mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
+            wallpapersRecyclerView.setAdapter(mAdapter);
+
+            Toast.makeText(this, "Magic, see? No Network calls", Toast.LENGTH_SHORT).show();
+        }
+        else {
+                callUnsplash();
         }
 
 
@@ -78,9 +91,27 @@ public class Browse extends AppCompatActivity {
 
     }
 
+    private void handleOrientation() {
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+
+            wallpapersRecyclerView.setLayoutManager(new
+                    GridLayoutManager(this, 2));
+        }
+        else{
+            wallpapersRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(WALLPAPERS_ARRAY,Wallpapers);
+        super.onSaveInstanceState(outState);
+    }
+
     private void callUnsplash() {
 
-        progressDialog.setMessage("Getting data from Unsplash...");
+        progressDialog.setMessage("Awesome things are happening, just wait a little while....");
         progressDialog.show();
 
         new UnsplashQueryTask().execute();

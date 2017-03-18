@@ -125,7 +125,7 @@ public class Wallpaper implements Parcelable {
     }
 
 
-    public static final Parcelable.Creator<Wallpaper> CREATOR=  new Parcelable.Creator<Wallpaper>(){
+    public static final Parcelable.Creator<Wallpaper> CREATOR =  new Parcelable.Creator<Wallpaper>(){
 
         @Override
         public Wallpaper createFromParcel(Parcel source) {
