@@ -27,4 +27,14 @@
             android:id="@+id/toolbar_title"/>
 
         </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/respinse_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="TextView"
+        />
+
+
 </android.support.constraint.ConstraintLayout>
