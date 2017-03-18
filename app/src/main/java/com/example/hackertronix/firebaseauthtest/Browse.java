@@ -24,17 +24,13 @@ public class Browse extends AppCompatActivity {
 
         View view = findViewById(R.id.browse_container);
         toolbar=(Toolbar)findViewById(R.id.toolbar_browse);
-        
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(Color.WHITE);
 
         }
-
-
-
-
 
 
         toolbar_tv=(TextView)findViewById(R.id.toolbar_title);
