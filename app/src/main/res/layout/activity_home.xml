@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.example.hackertronix.firebaseauthtest.Home">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/home_bg"
+        android:scaleType="fitXY"/>
+
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.example.hackertronix.firebaseauthtest.Home"
+    >
+
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolBar"
+            android:padding="5dp"
+            android:layout_marginRight="8dp">
+
+        </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/status_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="34dp"
+        android:textSize="62sp"
+        android:textColor="#fff"/>
+
+        <Button
+            style="@style/ButtonStyle"
+            android:text="Browse"
+            android:textColor="#2D37A9"
+            android:id="@+id/browse_btn"
+            android:layout_marginTop="105dp"
+            android:layout_gravity="center_horizontal" />
+        <Button
+            style="@style/ButtonStyle"
+            android:text="Favourites"
+            android:textColor="#2D37A9"
+            android:id="@+id/favourites_btn"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal" />
+
+
+</LinearLayout>
+
+
+</FrameLayout>
+
+
