@@ -11,6 +11,8 @@ public class API {
     public static final String WIDTH="500";
     public static final String HEIGHT="750";
 
+    public static final String LIST_IMAGE_ENDPOINT="http://unsplash.it/500/750?image=";
+
 
 
 }

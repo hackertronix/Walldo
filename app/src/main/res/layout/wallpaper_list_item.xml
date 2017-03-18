@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:layout_width="185dp"
+        android:layout_width="wrap_content"
         android:layout_height="278dp"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:cardCornerRadius="8dp"
-        android:layout_margin="8dp"
-        android:padding="8dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="6dp"
+        android:layout_gravity="center_horizontal"
         app:cardElevation="12dp">
 
         <ImageView
@@ -21,4 +22,4 @@
 
     </android.support.v7.widget.CardView>
 
-</FrameLayout>
+</RelativeLayout>

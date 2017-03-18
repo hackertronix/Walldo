@@ -1,25 +1,24 @@
 package com.example.hackertronix.firebaseauthtest;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.transition.Explode;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hackertronix.firebaseauthtest.adapters.WallpapersListAdapter;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.network.JSONParser;
 import com.example.hackertronix.firebaseauthtest.network.NetworkUtils;
 
-import com.example.hackertronix.firebaseauthtest.network.NetworkUtils;
 import com.example.hackertronix.firebaseauthtest.utils.API;
 
 import org.json.JSONException;
@@ -37,6 +36,8 @@ public class Browse extends AppCompatActivity {
 
     private RecyclerView wallpapersRecyclerView;
 
+    private WallpapersListAdapter mAdapter;
+
     private ArrayList<Wallpaper> Wallpapers;
 
 
@@ -51,12 +52,18 @@ public class Browse extends AppCompatActivity {
 
         wallpapersRecyclerView=(RecyclerView)findViewById(R.id.wallpaper_recyclerview);
 
+        wallpapersRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
+
+        callUnsplash();
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             getWindow().setStatusBarColor(Color.WHITE);
 
         }
+
+
 
 
         toolbar_tv=(TextView)findViewById(R.id.toolbar_title);
@@ -66,7 +73,7 @@ public class Browse extends AppCompatActivity {
 
         toolbar_tv.setTypeface(SFUI);
 
-        callUnsplash();
+
 
 
     }
@@ -83,34 +90,38 @@ public class Browse extends AppCompatActivity {
 
     private class UnsplashQueryTask extends AsyncTask<Void, Void, String>{
 
-        private String reposnse;
+        private String response;
 
         @Override
         protected String doInBackground(Void... params) {
 
 
             try {
-                 reposnse = NetworkUtils.getResponseFromUnsplash(API.API_ENDPOINT);
+                 response = NetworkUtils.getResponseFromUnsplash(API.API_ENDPOINT);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            return reposnse;
+            return response;
         }
 
         @Override
         protected void onPostExecute(String s) {
             progressDialog.dismiss();
             
-            if (reposnse != null && !reposnse.equals("")) {
+            if (response != null && !response.equals("")) {
 
                 try {
-                    Wallpapers = JSONParser.parseWallpapperData(reposnse);
+                    Wallpapers = JSONParser.parseWallpapperData(response);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
+                wallpapersRecyclerView.setAdapter(mAdapter);
+
                 Toast.makeText(Browse.this, "Fetched data for "+Wallpapers.size()+" wallpapers", Toast.LENGTH_LONG).show();
+                mAdapter.notifyDataSetChanged();
 
             }
             
