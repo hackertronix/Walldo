@@ -1,6 +1,7 @@
 package com.example.hackertronix.firebaseauthtest.network;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -28,12 +29,8 @@ public class NetworkUtils {
 
         String responseBody = response.body().string();
 
-        if(responseBody != null && !TextUtils.isEmpty(responseBody))
-        {
-            return responseBody;
-        }
-        else {
-            return null;
-        }
+        Log.d("TAG",responseBody);
+
+        return responseBody;
     }
 }
