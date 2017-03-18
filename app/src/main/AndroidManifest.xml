@@ -18,11 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home"></activity>
-        <activity android:name=".Browse"></activity>
+        <activity android:name=".Home" />
+        <activity android:name=".Browse" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="f61375f6d805385167adaed63d0eb0ef1f66b7dd" />
+
+        <activity android:name=".FullScreenImage"></activity>
     </application>
 
 </manifest>

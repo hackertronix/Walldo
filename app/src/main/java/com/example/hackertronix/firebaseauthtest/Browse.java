@@ -1,6 +1,7 @@
 package com.example.hackertronix.firebaseauthtest;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -28,7 +29,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Browse extends AppCompatActivity {
+public class Browse extends AppCompatActivity  {
 
     private static final String WALLPAPERS_ARRAY = "wallpapers_array";
     private Typeface SFUI;
@@ -70,7 +71,7 @@ public class Browse extends AppCompatActivity {
             mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
             wallpapersRecyclerView.setAdapter(mAdapter);
 
-            Toast.makeText(this, "Magic, see? No Network calls", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Magic, see? No Network calls", Toast.LENGTH_SHORT).show();
         }
         else {
                 callUnsplash();
@@ -119,6 +120,7 @@ public class Browse extends AppCompatActivity {
     }
 
 
+
     private class UnsplashQueryTask extends AsyncTask<Void, Void, String>{
 
         private String response;
@@ -151,7 +153,7 @@ public class Browse extends AppCompatActivity {
                 mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
                 wallpapersRecyclerView.setAdapter(mAdapter);
 
-                Toast.makeText(Browse.this, "Fetched data for "+Wallpapers.size()+" wallpapers", Toast.LENGTH_LONG).show();
+                //Toast.makeText(Browse.this, "Fetched data for "+Wallpapers.size()+" wallpapers", Toast.LENGTH_LONG).show();
                 mAdapter.notifyDataSetChanged();
 
             }
