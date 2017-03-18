@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.answers.Answers;
+import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -25,6 +27,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         setContentView(R.layout.activity_main);
 
         titleTextView=(TextView)findViewById(R.id.title_tv);
+
+        Fabric.with(this, new Crashlytics());
+        Fabric.with(this, new Answers());
 
         progressDialog= new ProgressDialog(this);
 

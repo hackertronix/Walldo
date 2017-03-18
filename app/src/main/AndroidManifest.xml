@@ -20,6 +20,9 @@
         </activity>
         <activity android:name=".Home"></activity>
         <activity android:name=".Browse"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="f61375f6d805385167adaed63d0eb0ef1f66b7dd" />
     </application>
 
 </manifest>
