@@ -20,6 +20,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     private GoogleApiClient mGoogleApiClient;
+
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -55,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         titleTextView.setTypeface(SFUI);
 
 
+        mFirebaseAnalytics= FirebaseAnalytics.getInstance(this);
 
         if(mAuth.getCurrentUser() != null)
         {
@@ -123,6 +127,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     private void signIn() {
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.SIGN_UP_METHOD,"Google Sign in");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SIGN_UP,bundle);
 
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent,RC_SIGN_IN);

@@ -15,12 +15,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Home extends AppCompatActivity {
 
     private TextView mStatusTextView;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -41,6 +43,8 @@ public class Home extends AppCompatActivity {
 
         mBrowseButton=(Button)findViewById(R.id.browse_btn);
         mFavouritesButton=(Button)findViewById(R.id.favourites_btn);
+
+        mFirebaseAnalytics= FirebaseAnalytics.getInstance(this);
 
 
         setSupportActionBar(toolbar);
@@ -93,7 +97,14 @@ public class Home extends AppCompatActivity {
         mBrowseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Bundle bundle= new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.SEARCH_TERM,"Browsed Wallpapers");
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH,bundle);
+
                 startActivity(new Intent(Home.this,Browse.class));
+
+
             }
         });
 

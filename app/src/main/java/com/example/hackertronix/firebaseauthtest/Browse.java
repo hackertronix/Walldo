@@ -26,6 +26,8 @@ public class Browse extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView toolbar_tv,response_tv;
     private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
