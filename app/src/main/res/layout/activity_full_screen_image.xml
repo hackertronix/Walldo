@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.hackertronix.firebaseauthtest.FullScreenImage"
+    android:background="#000"
     android:id="@+id/fullimage_container">
 
     <ImageView

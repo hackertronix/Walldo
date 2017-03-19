@@ -43,6 +43,8 @@ public class FullScreenImage extends AppCompatActivity {
         artistTextView=(TextView)findViewById(R.id.artist_tv);
         fullImage=(ImageView)findViewById(R.id.full_image_view);
         mProgressbar=(ProgressBar)findViewById(R.id.progressbar);
+
+
         //favouriteButton=(FloatingActionButton)findViewById(R.id.favourites_btn);
 
 
@@ -82,6 +84,7 @@ public class FullScreenImage extends AppCompatActivity {
 
                     }
                 }).crossFade()
+
                 .into(fullImage);
 
     }
