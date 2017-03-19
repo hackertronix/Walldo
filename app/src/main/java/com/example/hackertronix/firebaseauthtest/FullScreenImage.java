@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class FullScreenImage extends AppCompatActivity {
     private TextView artistTextView;
     private ImageView fullImage;
     private ProgressBar mProgressbar;
-    private FloatingActionButton favouriteButton;
+    private ImageButton favouriteButton;
     private String width;
     private String height;
     private Typeface Signalist;
@@ -54,7 +55,7 @@ public class FullScreenImage extends AppCompatActivity {
         mProgressbar=(ProgressBar)findViewById(R.id.progressbar);
 
 
-        favouriteButton=(FloatingActionButton)findViewById(R.id.fab);
+        favouriteButton=(ImageButton)findViewById(R.id.fab);
 
 
         Signalist=Typeface.createFromAsset(getAssets(),"fonts/Signalist.otf");
@@ -92,11 +93,11 @@ public class FullScreenImage extends AppCompatActivity {
                     @Override
                     public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         mProgressbar.setVisibility(View.GONE);
-                        favouriteButton.show();
+                        favouriteButton.setVisibility(View.VISIBLE);
                         return false;
                     }
                 })
-                .into(new SimpleTarget<Bitmap>(1080, 1920) {
+                .into(new SimpleTarget<Bitmap>(w, h) {
             @Override
             public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                 // Do something with bitmap here.
@@ -142,8 +143,6 @@ public class FullScreenImage extends AppCompatActivity {
 
         width= String.valueOf(size.x);
         height=String.valueOf(size.y);
-
-        //Toast.makeText(this,width+" x "+height,Toast.LENGTH_SHORT).show();
     }
 
 

@@ -19,7 +19,7 @@ public class JSONParser {
         JSONArray responseBody = new JSONArray(jsonResponse);
         ArrayList<Wallpaper> Wallpapers = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Wallpaper wallpaper = new Wallpaper();
             JSONObject jsonObject = responseBody.getJSONObject(i);
 

@@ -16,7 +16,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/wallpaper_preview_small"
-            android:src="@drawable/test_image"
             android:scaleType="fitXY"
             android:elevation="7dp"/>
 
