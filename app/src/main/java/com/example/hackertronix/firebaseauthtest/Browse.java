@@ -28,6 +28,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Browse extends AppCompatActivity  {
 
@@ -112,13 +113,20 @@ public class Browse extends AppCompatActivity  {
 
     private void callUnsplash() {
 
-        progressDialog.setMessage("Awesome things are happening, just wait a little while....");
+        progressDialog.setMessage(getRandomMessage());
         progressDialog.show();
 
         new UnsplashQueryTask().execute();
 
     }
 
+    private String getRandomMessage() {
+        Random random= new Random();
+
+        int index = random.nextInt(API.PROGRESS_DIALOG_MESSAGES.length);
+
+        return API.PROGRESS_DIALOG_MESSAGES[index];
+    }
 
 
     private class UnsplashQueryTask extends AsyncTask<Void, Void, String>{

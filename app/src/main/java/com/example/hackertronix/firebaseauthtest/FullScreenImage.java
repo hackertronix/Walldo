@@ -1,9 +1,12 @@
 package com.example.hackertronix.firebaseauthtest;
 
+import android.app.WallpaperManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +22,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.utils.API;
+
+import java.io.IOException;
 
 public class FullScreenImage extends AppCompatActivity {
 
@@ -29,10 +37,11 @@ public class FullScreenImage extends AppCompatActivity {
     private ImageView fullImage;
     private ProgressBar mProgressbar;
     private FloatingActionButton favouriteButton;
-    private Typeface SFUI;
-    
     private String width;
     private String height;
+    private Typeface Signalist;
+    private int h;
+    private int w;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +54,17 @@ public class FullScreenImage extends AppCompatActivity {
         mProgressbar=(ProgressBar)findViewById(R.id.progressbar);
 
 
-        //favouriteButton=(FloatingActionButton)findViewById(R.id.favourites_btn);
+        favouriteButton=(FloatingActionButton)findViewById(R.id.fab);
 
 
-        SFUI=Typeface.createFromAsset(getAssets(),"fonts/sftext.otf");
-        artistTextView.setTypeface(SFUI);
+        Signalist=Typeface.createFromAsset(getAssets(),"fonts/Signalist.otf");
+        artistTextView.setTypeface(Signalist);
 
-        View view=findViewById(R.id.fullimage_container);
+        getScreenDimensions();
+
+
+        checkFav();
+
 
         if(Build.VERSION.SDK_INT>=21) {
             getWindow().getDecorView().setSystemUiVisibility(
@@ -67,26 +80,55 @@ public class FullScreenImage extends AppCompatActivity {
 
         artistTextView.setText(wallpaper.getAuthor());
 
-        getScreenDimensions();
-        
+
         Glide.with(this).load(API.FULL_RES_IMAGE_ENDPOINT+width+"/"+height+"?image="+String.valueOf(wallpaper.getId()))
-                .listener(new RequestListener<String, GlideDrawable>() {
+                .asBitmap()
+                .listener(new RequestListener<String, Bitmap>() {
                     @Override
-                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        mProgressbar.setVisibility(View.GONE);
+                    public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         mProgressbar.setVisibility(View.GONE);
+                        favouriteButton.show();
                         return false;
-
                     }
-                }).crossFade()
+                })
+                .into(new SimpleTarget<Bitmap>(1080, 1920) {
+            @Override
+            public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
+                // Do something with bitmap here.
 
-                .into(fullImage);
+                fullImage.setImageBitmap(bitmap);
+            }
+        });
 
+        favouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImageAsWallpaper();
+            }
+        });
+
+    }
+
+    private void setImageAsWallpaper() {
+
+        WallpaperManager wallpapermanager= WallpaperManager.getInstance(this);
+        Bitmap wallpaper= ((BitmapDrawable)fullImage.getDrawable()).getBitmap();
+
+        try {
+            wallpapermanager.setBitmap(wallpaper);
+            Toast.makeText(this, "Wallpaper Set Successfully!", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void checkFav() {
     }
 
     private void getScreenDimensions() {
@@ -94,6 +136,10 @@ public class FullScreenImage extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
+
+        w=size.x;
+        h=size.y;
+
         width= String.valueOf(size.x);
         height=String.valueOf(size.y);
 
@@ -102,3 +148,5 @@ public class FullScreenImage extends AppCompatActivity {
 
 
 }
+
+
