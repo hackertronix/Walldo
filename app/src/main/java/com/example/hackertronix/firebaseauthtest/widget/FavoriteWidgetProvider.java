@@ -11,14 +11,13 @@ import android.widget.RemoteViews;
 
 import com.example.hackertronix.firebaseauthtest.Favorites;
 import com.example.hackertronix.firebaseauthtest.R;
+import com.example.hackertronix.firebaseauthtest.utils.API;
 
 /**
  * Created by hackertronix on 20/03/17.
  */
 
 public class FavoriteWidgetProvider extends AppWidgetProvider {
-
-    public static final String ACTION_DATABASE_UPDATED = "ccom.example.hackertronix.firebaseauthtest.widget.ACTION_DATA_UPDATED";
 
 
     @Override
@@ -54,7 +53,7 @@ public class FavoriteWidgetProvider extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if(ACTION_DATABASE_UPDATED.equals(intent.getAction()))
+        if(API.ACTION_DATABASE_UPDATED.equals(intent.getAction()))
         {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(

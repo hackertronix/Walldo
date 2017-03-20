@@ -2,6 +2,8 @@ package com.example.hackertronix.firebaseauthtest;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -187,6 +189,8 @@ public class FullScreenImage extends AppCompatActivity {
 
             Uri uri = getContentResolver().insert(FavoriteWallpaperEntry.CONTENT_URI,contentValues);
             favouriteButton.setImageResource(R.drawable.ic_favorite_black_24dp);
+
+            updateWidgets(getApplicationContext());
         }
         else
         {
@@ -196,14 +200,23 @@ public class FullScreenImage extends AppCompatActivity {
 
             //Toast.makeText(this, deleted+" item deleted", Toast.LENGTH_SHORT).show();
             favouriteButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+
+            updateWidgets(this);
             //finish();
         }
 
 
     }
 
+    private void updateWidgets(Context context) {
+
+            Intent dbUpdateIntent = new Intent(API.ACTION_DATABASE_UPDATED).setPackage(context.getPackageName());
+            context.sendBroadcast(dbUpdateIntent);
+
+    }
 
 
+    //// TODO: Implement this feature
     private void setImageAsWallpaper() {
 
     }

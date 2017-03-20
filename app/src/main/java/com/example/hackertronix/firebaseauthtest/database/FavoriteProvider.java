@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +14,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
+import com.example.hackertronix.firebaseauthtest.utils.API;
 
 /**
  * Created by hackertronix on 20/03/17.
@@ -139,8 +141,14 @@ public class FavoriteProvider extends ContentProvider {
 
 
          getContext().getContentResolver().notifyChange(uri,null);
+
          return returnUri;
     }
+
+//    private void updateWidget(Context context) {
+//        Intent dbUpdateIntent = new Intent(API.ACTION_DATABASE_UPDATED).setPackage(context.getPackageName());
+//        context.sendBroadcast(dbUpdateIntent);
+//    }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
@@ -165,6 +173,9 @@ public class FavoriteProvider extends ContentProvider {
         {
             getContext().getContentResolver().notifyChange(uri,null);
         }
+
+
+
         return favoritesDeleted;
 
 
