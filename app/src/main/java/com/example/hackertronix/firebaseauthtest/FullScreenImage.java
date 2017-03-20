@@ -1,6 +1,8 @@
 package com.example.hackertronix.firebaseauthtest;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -9,8 +11,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,11 +45,14 @@ public class FullScreenImage extends AppCompatActivity {
     private int h;
     private int w;
     private Wallpaper wallpaper;
+    public static final int TASK_LOADER_ID = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full_screen_image);
+
+        wallpaper = getIntent().getExtras().getParcelable("PARCEL");
 
 
         artistTextView=(TextView)findViewById(R.id.artist_tv);
@@ -73,7 +82,6 @@ public class FullScreenImage extends AppCompatActivity {
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
         }
 
-        wallpaper = getIntent().getExtras().getParcelable("PARCEL");
 
         artistTextView.setText(wallpaper.getAuthor());
 
@@ -111,46 +119,96 @@ public class FullScreenImage extends AppCompatActivity {
             }
         });
 
+        //getSupportLoaderManager().initLoader(TASK_LOADER_ID,null,this);
+
     }
+
+
+    private void checkFav() {
+
+
+
+        Uri singleItemUri = ContentUris.withAppendedId(FavoriteWallpaperEntry.CONTENT_URI, wallpaper.getId());
+
+        Cursor cursor = getContentResolver().query(singleItemUri,null,null,null,null);
+
+        if(cursor.getCount() > 0)
+        {
+            favouriteButton.setImageResource(R.drawable.ic_favorite_black_24dp);
+            cursor.close();
+        }
+
+        else{
+            favouriteButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            cursor.close();
+        }
+    }
+
+    private boolean isWallFav(Cursor cursor) {
+
+        if(cursor.getCount()>0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     private void handleFavorite() {
 
-        ContentValues contentValues = new ContentValues();
+        Uri singleItemUri = ContentUris.withAppendedId(FavoriteWallpaperEntry.CONTENT_URI, wallpaper.getId());
+        Cursor cursor = getContentResolver().query(singleItemUri,null,null,null,null);
+        boolean isFav = isWallFav(cursor);
+        if(isFav == false)
+        {
+            ContentValues contentValues = new ContentValues();
 
-        String format = wallpaper.getFormat();
-        String filename = wallpaper.getFilename();
-        String author = wallpaper.getAuthor();
-        String author_url = wallpaper.getAuthor_url();
-        String post_url = wallpaper.getPost_url();
+            String format = wallpaper.getFormat();
+            String filename = wallpaper.getFilename();
+            String author = wallpaper.getAuthor();
+            String author_url = wallpaper.getAuthor_url();
+            String post_url = wallpaper.getPost_url();
 
-        int width = wallpaper.getWidth();
-        int height = wallpaper.getHeight();
-        int id = wallpaper.getId();
+            int width = wallpaper.getWidth();
+            int height = wallpaper.getHeight();
+            int id = wallpaper.getId();
 
-        contentValues.put(FavoriteWallpaperEntry._ID,id);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_FORMAT,format);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_FILENAME,filename);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_AUTHOR,author);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_AUTHOR_URL,author_url);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_POST_URL,post_url);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_WIDTH,width);
-        contentValues.put(FavoriteWallpaperEntry.COLUMN_HEIGHT,height);
-
-
-        Uri uri = getContentResolver().insert(FavoriteWallpaperEntry.CONTENT_URI,contentValues);
+            contentValues.put(FavoriteWallpaperEntry._ID,id);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_FORMAT,format);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_FILENAME,filename);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_AUTHOR,author);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_AUTHOR_URL,author_url);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_POST_URL,post_url);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_WIDTH,width);
+            contentValues.put(FavoriteWallpaperEntry.COLUMN_HEIGHT,height);
 
 
-        if(uri!=null) {
-            Toast.makeText(getBaseContext(), "Inserted data at " + uri.toString(), Toast.LENGTH_SHORT).show();
+            Uri uri = getContentResolver().insert(FavoriteWallpaperEntry.CONTENT_URI,contentValues);
+            favouriteButton.setImageResource(R.drawable.ic_favorite_black_24dp);
         }
+        else
+        {
+
+
+            int deleted= getContentResolver().delete(singleItemUri,null,null);
+
+            //Toast.makeText(this, deleted+" item deleted", Toast.LENGTH_SHORT).show();
+            favouriteButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            //finish();
+        }
+
+
     }
+
+
 
     private void setImageAsWallpaper() {
 
     }
 
-    private void checkFav() {
-    }
+
 
     private void getScreenDimensions() {
 
@@ -163,6 +221,8 @@ public class FullScreenImage extends AppCompatActivity {
 
         width= String.valueOf(size.x);
         height=String.valueOf(size.y);
+
+
     }
 
 
