@@ -1,9 +1,14 @@
 package com.example.hackertronix.firebaseauthtest;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,9 +112,52 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         mSigninButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(isNetworkAvaialable()){
+
                 signIn();
+                }
+                else if(!isNetworkAvaialable())
+                {
+                    showAlertDialog();
+                }
             }
         });
+    }
+
+    private boolean isNetworkAvaialable() {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    private void showAlertDialog() {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setTitle("Whoah there chief!")
+                .setMessage("Walldo needs internet connectivity. Please retry after connecting.")
+                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(isNetworkAvaialable())
+                {
+                    signIn();
+                }
+
+                else{
+                    showAlertDialog();
+                }
+            }
+        }).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        }).create().show();
     }
 
 
