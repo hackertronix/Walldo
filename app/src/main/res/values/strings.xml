@@ -17,4 +17,14 @@
     <string name="you_are_now_in_the_browse_section">You are now in the browse section</string>
     <string name="the_image_is_being_downloaded_give_it_a_while">the image is being downloaded, give it a while</string>
     <string name="google_signin_failed">Hey, this failure is possibly due to a mismatch of SHA-1 and poorly configured googleservice.json file. Create a new project on the Firebase Console and add the google-services.json file in the project and try a rebuild</string>
+    <string name="signing_in">Signing in....</string>
+    <string name="network_error_message">Walldo needs internet connectivity. Please retry after connecting.</string>
+    <string name="network_error_title">Whoa there chief!</string>
+    <string name="walldo_description">Hey There, Welcome to Walldo</string>
+    <string name="retry">Retry</string>
+    <string name="sign_in_failed">Google Sign in failed</string>
+    <string name="set_wallpaper_confirmation">Do you want to set this image as your wallpaper?</string>
+    <string name="yes">Yes</string>
+    <string name="image_set">Image set as wallpaper!</string>
+    <string name="error_occured">Error occurred</string>
 </resources>

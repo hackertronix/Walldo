@@ -231,11 +231,9 @@ public class FullScreenImage extends AppCompatActivity {
 
             int deleted= getContentResolver().delete(singleItemUri,null,null);
 
-            //Toast.makeText(this, deleted+" item deleted", Toast.LENGTH_SHORT).show();
             favouriteButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 
             updateWidgets(this);
-            //finish();
         }
 
 
@@ -261,8 +259,8 @@ public class FullScreenImage extends AppCompatActivity {
 
 
      new AlertDialog.Builder(this).
-             setMessage("Do you want to set this image as your wallpaper?")
-             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+             setMessage(R.string.set_wallpaper_confirmation)
+             .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                  @Override
                  public void onClick(DialogInterface dialog, int which) {
                      WallpaperManager wallpaperManager = WallpaperManager.getInstance(getApplicationContext());
@@ -289,7 +287,7 @@ public class FullScreenImage extends AppCompatActivity {
 
     private void showSuccessDialog() {
         new AlertDialog.Builder(this)
-                .setMessage("Image set as wallpaper!")
+                .setMessage(R.string.image_set)
                 .setPositiveButton("OK", null)
                 .show();
     }

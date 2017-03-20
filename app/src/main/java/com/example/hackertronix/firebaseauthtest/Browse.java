@@ -72,7 +72,6 @@ public class Browse extends AppCompatActivity  {
             mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
             wallpapersRecyclerView.setAdapter(mAdapter);
 
-            //Toast.makeText(this, "Magic, see? No Network calls", Toast.LENGTH_SHORT).show();
         }
         else {
                 callUnsplash();
@@ -161,13 +160,12 @@ public class Browse extends AppCompatActivity  {
                 mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
                 wallpapersRecyclerView.setAdapter(mAdapter);
 
-                //Toast.makeText(Browse.this, "Fetched data for "+Wallpapers.size()+" wallpapers", Toast.LENGTH_LONG).show();
                 mAdapter.notifyDataSetChanged();
 
             }
             
             else {
-                Toast.makeText(Browse.this, "Error occured", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Browse.this, R.string.error_occured, Toast.LENGTH_SHORT).show();
             }
         }
     }

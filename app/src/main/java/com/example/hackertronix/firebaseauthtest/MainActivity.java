@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Signalist=Typeface.createFromAsset(getAssets(),"fonts/Signalist.otf");
         titleTextView.setTypeface(Signalist);
 
-        titleTextView.setContentDescription("Hey There, Welcome to Walldo");
+        titleTextView.setContentDescription(getString(R.string.walldo_description));
 
 
 
@@ -141,9 +141,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
-        alertDialog.setTitle("Whoah there chief!")
-                .setMessage("Walldo needs internet connectivity. Please retry after connecting.")
-                .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+        alertDialog.setTitle(R.string.network_error_title)
+                .setMessage(R.string.network_error_message)
+                .setPositiveButton(R.string.retry, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(isNetworkAvaialable())
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent,RC_SIGN_IN);
 
-        progressDialog.setMessage("Signing in....");
+        progressDialog.setMessage(getString(R.string.signing_in));
         progressDialog.show();
     }
 
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             else{
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
 
-                alertDialog.setTitle("Google Sign in failed")
+                alertDialog.setTitle(R.string.sign_in_failed)
                         .setMessage(R.string.google_signin_failed)
                         .setPositiveButton("GOT IT", new DialogInterface.OnClickListener() {
                             @Override

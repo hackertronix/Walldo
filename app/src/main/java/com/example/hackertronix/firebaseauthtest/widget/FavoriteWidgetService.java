@@ -133,9 +133,7 @@ public class FavoriteWidgetService extends RemoteViewsService {
 
                     remoteViews.setImageViewBitmap(R.id.list_widget_icon, bitmap);
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
             }
