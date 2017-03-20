@@ -210,7 +210,10 @@ public class FullScreenImage extends AppCompatActivity {
 
     private void updateWidgets(Context context) {
 
+
+            Toast.makeText(context, "Sending a broadcast now !!!", Toast.LENGTH_SHORT).show();
             Intent dbUpdateIntent = new Intent(API.ACTION_DATABASE_UPDATED).setPackage(context.getPackageName());
+            Log.d("TAG","Sent a broadcast");
             context.sendBroadcast(dbUpdateIntent);
 
     }

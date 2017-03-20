@@ -7,7 +7,9 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.example.hackertronix.firebaseauthtest.Favorites;
 import com.example.hackertronix.firebaseauthtest.R;
@@ -59,6 +61,9 @@ public class FavoriteWidgetProvider extends AppWidgetProvider {
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
                     new ComponentName(context, getClass()));
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
+
+            Toast.makeText(context,"Received something",Toast.LENGTH_SHORT).show();
+            Log.d("TAG","IN ON RECIEVE");
         }
     }
 }

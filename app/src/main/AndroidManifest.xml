@@ -32,18 +32,27 @@
             android:authorities="com.example.hackertronix.firebaseauthtest"
             android:exported="false" />
 
-        <activity android:name=".Favorites"></activity>
+        <activity android:name=".Favorites">
 
-        <receiver android:name=".widget.FavoriteWidgetProvider">
+        </activity>
+
+        <receiver android:name=".widget.FavoriteWidgetProvider"
+            android:label="@string/widget_name">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.hackertronix.firebaseauthtest.utils.API.ACTION_DATABASE_UPDATED"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/app_widget_info"/>
         </receiver>
+
+
+        <service android:name=".widget.FavoriteWidgetService"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
 
     </application>
 
