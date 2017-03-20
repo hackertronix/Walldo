@@ -13,11 +13,11 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME="wallpapers.db";
 
-    public static final int DATABSE_VERSION=1;
+    public static final int DATABASE_VERSION =1;
 
 
     public FavoriteDbHelper(Context context){
-        super(context, DATABASE_NAME, null, DATABSE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override

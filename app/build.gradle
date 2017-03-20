@@ -26,13 +26,23 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("new-release-key.jks")
+            storePassword "qwertyuiop"
+            keyAlias "newReleaseKey"
+            keyPassword "qwertyuiop"
+        }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
+}}
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
