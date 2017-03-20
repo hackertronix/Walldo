@@ -70,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Signalist=Typeface.createFromAsset(getAssets(),"fonts/Signalist.otf");
         titleTextView.setTypeface(Signalist);
 
+        titleTextView.setContentDescription("Hey There, Welcome to Walldo");
+
+
 
         mFirebaseAnalytics= FirebaseAnalytics.getInstance(this);
 
@@ -106,7 +109,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
         mSigninButton=(Button)findViewById(R.id.signin_button);
-
 
 
 

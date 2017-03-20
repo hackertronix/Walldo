@@ -2,4 +2,18 @@
     <string name="app_name">Walldo</string>
     <string name="sign_out">Sign Out</string>
     <string name="widget_name">Walldo</string>
+    <string name="favorites">Favorites</string>
+    <string name="set_wallpaper">Set</string>
+    <string name="browse">Browse</string>
+    <string name="favourites">Favourites</string>
+    <string name="walldo">Walldo</string>
+    <string name="favorites_widget">Favorites</string>
+    <string name="add_a_favorite">Add a favorite</string>
+    <string name="mark_as_favorite">mark as favorite</string>
+    <string name="set_current_image_as_wallpaper">set current image as wallpaper</string>
+    <string name="full_bleed_wallpaper">this is the full bleed wallpaper</string>
+    <string name="sign_in_with_google">sign in with google</string>
+    <string name="you_are_now_in_the_favorites_section">You are now in the favorites section</string>
+    <string name="you_are_now_in_the_browse_section">You are now in the browse section</string>
+    <string name="the_image_is_being_downloaded_give_it_a_while">the image is being downloaded, give it a while</string>
 </resources>

@@ -24,7 +24,7 @@
             android:textColor="#FFF"
             android:textSize="105sp"
             android:id="@+id/title_tv"
-            android:text="Walldo"
+            android:text="@string/walldo"
             android:gravity="center"
             android:layout_marginTop="50dp"/>
 
@@ -33,6 +33,7 @@
             android:layout_height="50dp"
             android:id="@+id/signin_button"
             android:background="@drawable/sign_in"
+            android:contentDescription="@string/sign_in_with_google"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_alignParentBottom="true"

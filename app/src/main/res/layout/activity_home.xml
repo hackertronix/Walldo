@@ -47,14 +47,14 @@
 
         <Button
             style="@style/ButtonStyle"
-            android:text="Browse"
+            android:text="@string/browse"
             android:textColor="#2D37A9"
             android:id="@+id/browse_btn"
             android:layout_marginTop="105dp"
             android:layout_gravity="center_horizontal" />
         <Button
             style="@style/ButtonStyle"
-            android:text="Favourites"
+            android:text="@string/favourites"
             android:textColor="#2D37A9"
             android:id="@+id/favourites_btn"
             android:layout_marginTop="10dp"

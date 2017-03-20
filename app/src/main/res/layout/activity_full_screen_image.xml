@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/full_bleed_wallpaper"
         android:layout_centerVertical="true"
         android:adjustViewBounds="false"
         android:scaleType="fitXY"/>
@@ -45,6 +46,7 @@
         android:theme="@style/AppTheme.WhiteAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/the_image_is_being_downloaded_give_it_a_while"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
@@ -56,6 +58,7 @@
         android:theme="@style/AppTheme.WhiteAccent"
         android:visibility="invisible"
         android:clickable="true"
+        android:contentDescription="@string/mark_as_favorite"
         android:src="@drawable/ic_favorite_border_black_24dp"
         app:rippleColor="#fff"
         app:layout_anchorGravity="bottom|right"
@@ -73,7 +76,8 @@
         android:visibility="invisible"
         style="@style/ButtonStyle"
         android:textColor="#FB0404"
-        android:text="Set"
+        android:text="@string/set_wallpaper"
+        android:contentDescription="@string/set_current_image_as_wallpaper"
         android:textSize="15sp"
         android:layout_marginTop="52dp"
         android:layout_marginRight="22dp"

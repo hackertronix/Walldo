@@ -20,7 +20,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Favorites"
+            android:text="@string/favorites"
+            android:contentDescription="@string/you_are_now_in_the_favorites_section"
             android:textColor="#373737"
             android:textSize="32sp"
             android:id="@+id/toolbar_title"/>

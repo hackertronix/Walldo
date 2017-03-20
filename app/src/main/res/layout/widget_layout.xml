@@ -17,7 +17,7 @@
             android:layout_marginLeft="@dimen/abc_list_item_padding_horizontal_material"
             android:layout_marginStart="@dimen/abc_list_item_padding_horizontal_material"
             android:gravity="center_vertical"
-            android:text="Favorites"
+            android:text="@string/favorites_widget"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
@@ -45,7 +45,7 @@
             android:layout_height="match_parent"
             android:fontFamily="monospace"
             android:gravity="center"
-            android:text="Add a favorite"
+            android:text="@string/add_a_favorite"
             android:textAppearance="?android:textAppearanceLarge" />
     </FrameLayout>
 

@@ -111,6 +111,7 @@ public class FullScreenImage extends AppCompatActivity {
 
 
         artistTextView.setText(wallpaper.getAuthor());
+        artistTextView.setContentDescription("This image was photographed by "+wallpaper.getAuthor());
 
 
         Glide.with(this).load(API.FULL_RES_IMAGE_ENDPOINT+ width+"/"+height+"?image="+String.valueOf(wallpaper.getId()))
@@ -130,7 +131,7 @@ public class FullScreenImage extends AppCompatActivity {
                         return false;
                     }
                 })
-                .into(new SimpleTarget<Bitmap>(500, 750) {
+                .into(new SimpleTarget<Bitmap>(w, h) {
             @Override
             public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                 // Do something with bitmap here.
