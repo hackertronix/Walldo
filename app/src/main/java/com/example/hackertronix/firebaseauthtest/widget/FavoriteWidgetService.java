@@ -15,6 +15,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hackertronix.firebaseauthtest.R;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;

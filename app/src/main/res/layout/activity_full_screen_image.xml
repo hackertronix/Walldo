@@ -59,27 +59,31 @@
         android:src="@drawable/ic_favorite_border_black_24dp"
         app:rippleColor="#fff"
         app:layout_anchorGravity="bottom|right"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:elevation="12dp"/>
 
-    <!--<ImageButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/fab"-->
-        <!--android:visibility="visible"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:src="@drawable/ic_favorite_border_black_24dp"-->
-        <!--android:background="?android:selectableItemBackground"-->
-        <!--android:layout_marginRight="37dp"-->
-        <!--android:layout_marginEnd="37dp"-->
-        <!--android:layout_marginTop="56dp"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentEnd="true" />-->
+    <Button
+        android:id="@+id/set_wallpaper"
+        android:layout_width="72dp"
+        android:layout_height="39dp"
+        android:visibility="invisible"
+        style="@style/ButtonStyle"
+        android:textColor="#FB0404"
+        android:text="Set"
+        android:textSize="15sp"
+        android:layout_marginTop="52dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+
 
 
 

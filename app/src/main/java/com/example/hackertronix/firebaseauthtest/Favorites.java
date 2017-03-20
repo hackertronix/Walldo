@@ -1,5 +1,6 @@
 package com.example.hackertronix.firebaseauthtest;
 
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -24,7 +25,7 @@ public class Favorites extends AppCompatActivity implements LoaderManager.Loader
     public static final int TASK_LOADER_ID = 0;
 
     private FavoritesWallpaperAdapter mAdapter;
-    private RecyclerView mRecyclerView;
+    private RecyclerView mFavoritesRecyclerView;
     private TextView toolbar_tv;
     private Typeface SFUI;
 
@@ -35,7 +36,9 @@ public class Favorites extends AppCompatActivity implements LoaderManager.Loader
         setContentView(R.layout.activity_favorites);
 
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.favorites_recyclerview);
+        mFavoritesRecyclerView = (RecyclerView) findViewById(R.id.favorites_recyclerview);
+
+        handleOrientation();
         toolbar_tv = (TextView) findViewById(R.id.toolbar_title);
 
 
@@ -51,21 +54,30 @@ public class Favorites extends AppCompatActivity implements LoaderManager.Loader
 
         toolbar_tv.setTypeface(SFUI);
 
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
         mAdapter = new FavoritesWallpaperAdapter(this);
-        mRecyclerView.setAdapter(mAdapter);
+        mFavoritesRecyclerView.setAdapter(mAdapter);
 
 
         getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
 
     }
 
+    private void handleOrientation() {
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+
+            mFavoritesRecyclerView.setLayoutManager(new
+                    GridLayoutManager(this, 2));
+        }
+        else{
+            mFavoritesRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        }
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-
-        // re-queries for all tasks
         getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
     }
 
