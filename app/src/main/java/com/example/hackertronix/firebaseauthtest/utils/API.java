@@ -14,6 +14,7 @@ public class API {
     //TODO ADD 500 and 750 from to LIST_IMAGE_ENDPOINT
 
     public static final String LIST_IMAGE_ENDPOINT="http://unsplash.it/500/750?image=";
+    public static final String WIDGET_IMAGE_ENDPOINT="http://unsplash.it/40/40?image=";
     public static final String FULL_RES_IMAGE_ENDPOINT="http://unsplash.it/";
 
 
