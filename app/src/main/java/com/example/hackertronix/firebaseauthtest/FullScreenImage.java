@@ -1,5 +1,8 @@
 package com.example.hackertronix.firebaseauthtest;
 
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -34,6 +37,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.utils.API;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
+import com.example.hackertronix.firebaseauthtest.widget.FavoriteWidgetProvider;
 
 public class FullScreenImage extends AppCompatActivity {
 
@@ -210,11 +214,21 @@ public class FullScreenImage extends AppCompatActivity {
 
     private void updateWidgets(Context context) {
 
+//
+//            Toast.makeText(context, "Sending a broadcast now !!!", Toast.LENGTH_SHORT).show();
+//            Intent dbUpdateIntent = new Intent(API.ACTION_DATABASE_UPDATED).setPackage(context.getPackageName());
+//            Log.d("TAG","Sent a broadcast");
+//            context.sendBroadcast(dbUpdateIntent);
 
-            Toast.makeText(context, "Sending a broadcast now !!!", Toast.LENGTH_SHORT).show();
-            Intent dbUpdateIntent = new Intent(API.ACTION_DATABASE_UPDATED).setPackage(context.getPackageName());
-            Log.d("TAG","Sent a broadcast");
-            context.sendBroadcast(dbUpdateIntent);
+        ComponentName name = new ComponentName(this, FavoriteWidgetProvider.class);
+        int[] ids = AppWidgetManager.getInstance(this).getAppWidgetIds(name);
+
+        Intent intent = new Intent(this,FavoriteWidgetProvider.class);
+
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,ids);
+        sendBroadcast(intent);
+
 
     }
 

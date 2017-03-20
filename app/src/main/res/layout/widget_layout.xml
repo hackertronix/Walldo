@@ -9,18 +9,22 @@
         android:id="@+id/widget"
         android:layout_width="match_parent"
         android:layout_height="@dimen/abc_action_bar_default_height_material"
-        android:background="@color/colorPrimary">
-
+        android:background="#FFF">
         <TextView
             android:id="@+id/widget_saved_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/abc_list_item_padding_horizontal_material"
             android:layout_marginStart="@dimen/abc_list_item_padding_horizontal_material"
-            android:textColor="@android:color/black"
             android:gravity="center_vertical"
-            android:text="Favorited"
-            android:textSize="18sp" />
+            android:text="Favorites"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@android:color/black"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            android:typeface="monospace" />
 
     </FrameLayout>
 
@@ -28,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#FF9">
+        android:background="#FFF">
 
         <ListView
             android:id="@+id/widget_list"
@@ -39,7 +43,7 @@
             android:id="@+id/widget_empty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="monospace"
             android:gravity="center"
             android:text="Add a favorite"
             android:textAppearance="?android:textAppearanceLarge" />

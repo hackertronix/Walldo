@@ -50,7 +50,7 @@
         </receiver>
 
 
-        <service android:name=".widget.FavoriteWidgetService"
+        <service android:name="com.example.hackertronix.firebaseauthtest.widget.FavoriteWidgetService"
             android:exported="false"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
 

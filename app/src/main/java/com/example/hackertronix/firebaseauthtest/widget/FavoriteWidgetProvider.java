@@ -1,6 +1,9 @@
 package com.example.hackertronix.firebaseauthtest.widget;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -20,50 +23,49 @@ import com.example.hackertronix.firebaseauthtest.utils.API;
  */
 
 public class FavoriteWidgetProvider extends AppWidgetProvider {
-
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
 
-        for(int appWidgetId : appWidgetIds)
-        {
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        for ( int appWidgetId : appWidgetIds ) {
+            updateAppWidget(context,appWidgetManager, appWidgetId);
 
-            Intent intent = new Intent(context, Favorites.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context,0,intent,0);
-
-            views.setOnClickPendingIntent(R.id.widget,pendingIntent);
-
-            views.setRemoteAdapter(R.id.widget_list,new Intent(context,Favorites.class));
-
-            Intent clickIntentTemplate = new Intent(context, Favorites.class);
-
-            PendingIntent clickPendingIntentTemplate = TaskStackBuilder.create(context)
-                    .addNextIntentWithParentStack(clickIntentTemplate)
-                    .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setPendingIntentTemplate(R.id.widget_list, clickPendingIntentTemplate);
-
-            views.setEmptyView(R.id.widget_list, R.id.widget_empty);
-
-
-            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
+
+    private  static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        setRemoteAdapter(context,remoteViews);
+
+        Intent launchFavorites = new Intent(context,Favorites.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,0,launchFavorites,0);
+
+        remoteViews.setOnClickPendingIntent(R.id.widget,pendingIntent);
+
+        remoteViews.setEmptyView(R.id.widget_list,R.id.widget_empty);
+
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,R.id.widget_list);
+        appWidgetManager.updateAppWidget(appWidgetId,remoteViews);
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
+        views.setRemoteAdapter(R.id.widget_list,
+                new Intent(context, FavoriteWidgetService.class));
+    }
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context,getClass()));
+
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds,R.id.widget_list);
         super.onReceive(context, intent);
-
-        if(API.ACTION_DATABASE_UPDATED.equals(intent.getAction()))
-        {
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(
-                    new ComponentName(context, getClass()));
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
-
-            Toast.makeText(context,"Received something",Toast.LENGTH_SHORT).show();
-            Log.d("TAG","IN ON RECIEVE");
-        }
     }
 }

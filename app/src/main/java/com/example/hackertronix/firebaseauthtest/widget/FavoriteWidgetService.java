@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Binder;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -29,6 +30,8 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class FavoriteWidgetService extends RemoteViewsService {
+
+    private Typeface Signalist;
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
 
@@ -107,6 +110,7 @@ public class FavoriteWidgetService extends RemoteViewsService {
 
             RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.list_item_widget);
             mCursor.moveToPosition(position);
+
             remoteViews.setTextViewText(R.id.list_widget_text, mCursor.getString(mCursor.getColumnIndex(FavoriteWallpaperEntry.COLUMN_AUTHOR)));
 
             int id = mCursor.getInt(mCursor.getColumnIndex(FavoriteWallpaperEntry._ID));

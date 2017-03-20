@@ -23,8 +23,9 @@
         android:id="@+id/list_widget_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:layout_weight="1"
-        android:textColor="@android:color/black"
+        android:textColor="#272727"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textSize="17sp" />
 

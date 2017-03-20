@@ -11,7 +11,7 @@ public class API {
     public static final String WIDTH="500";
     public static final String HEIGHT="750";
 
-    public static final String ACTION_DATABASE_UPDATED = "ccom.example.hackertronix.firebaseauthtest.widget.ACTION_DATA_UPDATED";
+    public static final String ACTION_DATABASE_UPDATED = "com.example.hackertronix.firebaseauthtest.utils.ACTION_DATA_UPDATED";
 
 
     //TODO ADD 500 and 750 from to LIST_IMAGE_ENDPOINT
