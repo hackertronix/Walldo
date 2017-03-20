@@ -50,8 +50,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static final int RC_SIGN_IN=9001;
     public static final String TAG="SigninActivity";
 
-    private Typeface SFUI;
     private TextView titleTextView;
+    private Typeface Signalist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mAuth=FirebaseAuth.getInstance();
 
-        SFUI= Typeface.createFromAsset(getAssets(),"fonts/sftext.otf");
-        titleTextView.setTypeface(SFUI);
+        Signalist=Typeface.createFromAsset(getAssets(),"fonts/Signalist.otf");
+        titleTextView.setTypeface(Signalist);
 
 
         mFirebaseAnalytics= FirebaseAnalytics.getInstance(this);
