@@ -211,7 +211,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 firebaseAuthWithGoogle(account);
             }
             else{
-                Toast.makeText(this, "Google Sign In Failed", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+
+                alertDialog.setTitle("Google Sign in failed")
+                        .setMessage(R.string.google_signin_failed)
+                        .setPositiveButton("GOT IT", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).show();
             }
         }
         }

@@ -16,4 +16,5 @@
     <string name="you_are_now_in_the_favorites_section">You are now in the favorites section</string>
     <string name="you_are_now_in_the_browse_section">You are now in the browse section</string>
     <string name="the_image_is_being_downloaded_give_it_a_while">the image is being downloaded, give it a while</string>
+    <string name="google_signin_failed">Hey, this failure is possibly due to a mismatch of SHA-1 and poorly configured googleservice.json file. Create a new project on the Firebase Console and add the google-services.json file in the project and try a rebuild</string>
 </resources>
