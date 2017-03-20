@@ -48,38 +48,38 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/fab"-->
-        <!--app:fabSize="normal"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/AppTheme.WhiteAccent"-->
-        <!--android:visibility="invisible"-->
-        <!--android:clickable="true"-->
-        <!--android:src="@drawable/ic_favorite_border_black_24dp"-->
-        <!--app:rippleColor="#fff"-->
-        <!--app:layout_anchorGravity="bottom|right"-->
-        <!--android:layout_marginRight="20dp"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:elevation="12dp"/>-->
-
-    <ImageButton
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        app:fabSize="normal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/fab"
-        android:visibility="visible"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:theme="@style/AppTheme.WhiteAccent"
+        android:visibility="invisible"
+        android:clickable="true"
         android:src="@drawable/ic_favorite_border_black_24dp"
-        android:background="?android:selectableItemBackground"
-        android:layout_marginRight="37dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginTop="56dp"
-        android:layout_alignParentTop="true"
+        app:rippleColor="#fff"
+        app:layout_anchorGravity="bottom|right"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:elevation="12dp"/>
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/fab"-->
+        <!--android:visibility="visible"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:src="@drawable/ic_favorite_border_black_24dp"-->
+        <!--android:background="?android:selectableItemBackground"-->
+        <!--android:layout_marginRight="37dp"-->
+        <!--android:layout_marginEnd="37dp"-->
+        <!--android:layout_marginTop="56dp"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
 
 

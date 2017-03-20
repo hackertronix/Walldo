@@ -108,6 +108,14 @@ public class Home extends AppCompatActivity {
             }
         });
 
+
+        mFavouritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Home.this,Favorites.class));
+            }
+        });
+
     }
 
     @Override

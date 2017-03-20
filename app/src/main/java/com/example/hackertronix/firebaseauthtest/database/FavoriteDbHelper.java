@@ -24,16 +24,15 @@ public class FavoriteDbHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         final String SQL_CREATE_FAVOURITES_TABLE= "CREATE TABLE "+
-                FavoriteWallpaperEntry.TABLE_NAME+" ("+
-                FavoriteWallpaperEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                FavoriteWallpaperEntry.TABLE_NAME+" ( "+
+                FavoriteWallpaperEntry._ID + " INTEGER PRIMARY KEY, "+
                 FavoriteWallpaperEntry.COLUMN_FORMAT + " TEXT NOT NULL, "+
                 FavoriteWallpaperEntry.COLUMN_FILENAME + " TEXT NOT NULL, "+
                 FavoriteWallpaperEntry.COLUMN_AUTHOR + " TEXT NOT NULL, "+
                 FavoriteWallpaperEntry.COLUMN_AUTHOR_URL + " TEXT NOT NULL, "+
                 FavoriteWallpaperEntry.COLUMN_POST_URL + "  TEXT NOT NULL, "+
                 FavoriteWallpaperEntry.COLUMN_WIDTH + " INTEGER NOT NULL, " +
-                FavoriteWallpaperEntry.COLUMN_HEIGHT + " INTEGER NOT NULL, "+
-                FavoriteWallpaperEntry.COLUMN_ID + " INTEGER NOT NULL "+
+                FavoriteWallpaperEntry.COLUMN_HEIGHT + " INTEGER NOT NULL "+
                 ");";
 
         db.execSQL(SQL_CREATE_FAVOURITES_TABLE);

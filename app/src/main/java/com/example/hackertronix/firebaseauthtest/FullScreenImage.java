@@ -1,48 +1,44 @@
 package com.example.hackertronix.firebaseauthtest;
 
-import android.app.WallpaperManager;
-import android.content.Intent;
+import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.utils.API;
-
-import java.io.IOException;
+import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
 
 public class FullScreenImage extends AppCompatActivity {
 
     private TextView artistTextView;
     private ImageView fullImage;
     private ProgressBar mProgressbar;
-    private ImageButton favouriteButton;
+    private FloatingActionButton favouriteButton;
     private String width;
     private String height;
     private Typeface Signalist;
     private int h;
     private int w;
+    private Wallpaper wallpaper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +51,7 @@ public class FullScreenImage extends AppCompatActivity {
         mProgressbar=(ProgressBar)findViewById(R.id.progressbar);
 
 
-        favouriteButton=(ImageButton)findViewById(R.id.fab);
+        favouriteButton=(FloatingActionButton)findViewById(R.id.fab);
 
 
         Signalist=Typeface.createFromAsset(getAssets(),"fonts/Signalist.otf");
@@ -77,12 +73,14 @@ public class FullScreenImage extends AppCompatActivity {
             getWindow().setNavigationBarColor(Color.TRANSPARENT);
         }
 
-        Wallpaper wallpaper = getIntent().getExtras().getParcelable("PARCEL");
+        wallpaper = getIntent().getExtras().getParcelable("PARCEL");
 
         artistTextView.setText(wallpaper.getAuthor());
 
+        //TODO REMOVE 500 and 750 from glide request and add width and height instead
 
-        Glide.with(this).load(API.FULL_RES_IMAGE_ENDPOINT+width+"/"+height+"?image="+String.valueOf(wallpaper.getId()))
+
+        Glide.with(this).load(API.FULL_RES_IMAGE_ENDPOINT+"500"+"/"+"750"+"?image="+String.valueOf(wallpaper.getId()))
                 .asBitmap()
                 .listener(new RequestListener<String, Bitmap>() {
                     @Override
@@ -93,11 +91,11 @@ public class FullScreenImage extends AppCompatActivity {
                     @Override
                     public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
                         mProgressbar.setVisibility(View.GONE);
-                        favouriteButton.setVisibility(View.VISIBLE);
+                        favouriteButton.show();
                         return false;
                     }
                 })
-                .into(new SimpleTarget<Bitmap>(w, h) {
+                .into(new SimpleTarget<Bitmap>(500, 750) {
             @Override
             public void onResourceReady(Bitmap bitmap, GlideAnimation anim) {
                 // Do something with bitmap here.
@@ -109,23 +107,45 @@ public class FullScreenImage extends AppCompatActivity {
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setImageAsWallpaper();
+                handleFavorite();
             }
         });
 
     }
 
-    private void setImageAsWallpaper() {
+    private void handleFavorite() {
 
-        WallpaperManager wallpapermanager= WallpaperManager.getInstance(this);
-        Bitmap wallpaper= ((BitmapDrawable)fullImage.getDrawable()).getBitmap();
+        ContentValues contentValues = new ContentValues();
 
-        try {
-            wallpapermanager.setBitmap(wallpaper);
-            Toast.makeText(this, "Wallpaper Set Successfully!", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        String format = wallpaper.getFormat();
+        String filename = wallpaper.getFilename();
+        String author = wallpaper.getAuthor();
+        String author_url = wallpaper.getAuthor_url();
+        String post_url = wallpaper.getPost_url();
+
+        int width = wallpaper.getWidth();
+        int height = wallpaper.getHeight();
+        int id = wallpaper.getId();
+
+        contentValues.put(FavoriteWallpaperEntry._ID,id);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_FORMAT,format);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_FILENAME,filename);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_AUTHOR,author);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_AUTHOR_URL,author_url);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_POST_URL,post_url);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_WIDTH,width);
+        contentValues.put(FavoriteWallpaperEntry.COLUMN_HEIGHT,height);
+
+
+        Uri uri = getContentResolver().insert(FavoriteWallpaperEntry.CONTENT_URI,contentValues);
+
+
+        if(uri!=null) {
+            Toast.makeText(getBaseContext(), "Inserted data at " + uri.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void setImageAsWallpaper() {
 
     }
 

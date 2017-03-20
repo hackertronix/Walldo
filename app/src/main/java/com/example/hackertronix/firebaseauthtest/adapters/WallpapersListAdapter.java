@@ -71,6 +71,9 @@ public class WallpapersListAdapter extends RecyclerView.Adapter<WallpapersListAd
 
         public void bind(Wallpaper wallpaper)
         {
+
+            //TODO ADD 500 and 750 to LIST_IMAGE_ENDPOINT
+
             mWallpaper=wallpaper;
             Glide.with(mContext).load(API.LIST_IMAGE_ENDPOINT+String.valueOf(mWallpaper.getId()))
                     .error(R.drawable.error)

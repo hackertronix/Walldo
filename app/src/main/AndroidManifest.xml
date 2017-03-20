@@ -3,7 +3,8 @@
     package="com.example.hackertronix.firebaseauthtest">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +25,14 @@
             android:name="io.fabric.ApiKey"
             android:value="f61375f6d805385167adaed63d0eb0ef1f66b7dd" />
 
-        <activity android:name=".FullScreenImage"></activity>
+        <activity android:name=".FullScreenImage" />
+
+        <provider
+            android:name=".database.FavoriteProvider"
+            android:authorities="com.example.hackertronix.firebaseauthtest"
+            android:exported="false" />
+
+        <activity android:name=".Favorites"></activity>
     </application>
 
 </manifest>
