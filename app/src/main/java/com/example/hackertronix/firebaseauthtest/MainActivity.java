@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 firebaseAuthWithGoogle(account);
             }
             else{
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
 
                 alertDialog.setTitle(R.string.sign_in_failed)
                         .setMessage(R.string.google_signin_failed)
