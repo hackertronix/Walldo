@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hackertronix.firebaseauthtest.Browse;
 import com.example.hackertronix.firebaseauthtest.FullScreenImage;
 import com.example.hackertronix.firebaseauthtest.R;
@@ -77,7 +76,6 @@ public class WallpapersListAdapter extends RecyclerView.Adapter<WallpapersListAd
             mWallpaper=wallpaper;
             Glide.with(mContext).load(API.LIST_IMAGE_ENDPOINT+String.valueOf(mWallpaper.getId()))
                     .error(R.drawable.error)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.placeholder)
                     .crossFade()
                     .into(wallpaperPreview);
