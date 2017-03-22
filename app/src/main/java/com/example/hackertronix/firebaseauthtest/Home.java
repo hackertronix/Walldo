@@ -92,7 +92,7 @@ public class Home extends AppCompatActivity {
         String fullName=mAuth.getCurrentUser().getDisplayName();
         String[] name = fullName.split(" ");
 
-        mStatusTextView.setText(getString(R.string.hey_there) + name[0] + ".");
+        mStatusTextView.setText(getString(R.string.hey_there) +" "+name[0] + ".");
 
         mBrowseButton.setOnClickListener(new View.OnClickListener() {
             @Override
