@@ -46,6 +46,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.utils.API;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
+import com.example.hackertronix.firebaseauthtest.widget.FavoriteWidgetProvider;
 
 import java.io.IOException;
 
@@ -222,6 +223,7 @@ public class FullScreenImage extends AppCompatActivity {
             Uri uri = getContentResolver().insert(FavoriteWallpaperEntry.CONTENT_URI,contentValues);
             favouriteButton.setImageResource(R.drawable.ic_favorite_black_24dp);
 
+            updateWidgets(getApplicationContext());
         }
         else
         {
@@ -231,13 +233,27 @@ public class FullScreenImage extends AppCompatActivity {
 
             favouriteButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
 
-
+            updateWidgets(this);
         }
 
 
     }
 
+    private void updateWidgets(Context context) {
 
+
+
+        ComponentName name = new ComponentName(this, FavoriteWidgetProvider.class);
+        int[] ids = AppWidgetManager.getInstance(this).getAppWidgetIds(name);
+
+        Intent intent = new Intent(this,FavoriteWidgetProvider.class);
+
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,ids);
+        sendBroadcast(intent);
+
+
+    }
 
     private void setImageAsWallpaper() {
 
@@ -291,9 +307,8 @@ public class FullScreenImage extends AppCompatActivity {
 
 
     }
+
+
 }
-
-
-
 
 

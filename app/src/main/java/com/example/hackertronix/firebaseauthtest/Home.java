@@ -4,10 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -92,7 +92,7 @@ public class Home extends AppCompatActivity {
         String fullName=mAuth.getCurrentUser().getDisplayName();
         String[] name = fullName.split(" ");
 
-        mStatusTextView.setText("Hey there "+ name[0]+".");
+        mStatusTextView.setText(getString(R.string.hey_there) + name[0] + ".");
 
         mBrowseButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -36,7 +36,7 @@
 
         </activity>
 
-        <!--<receiver android:name=".widget.FavoriteWidgetProvider"
+        <receiver android:name=".widget.FavoriteWidgetProvider"
             android:label="@string/widget_name">
 
             <intent-filter>
@@ -52,7 +52,7 @@
 
         <service android:name="com.example.hackertronix.firebaseauthtest.widget.FavoriteWidgetService"
             android:exported="false"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>-->
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
 
     </application>
 
