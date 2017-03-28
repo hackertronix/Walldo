@@ -1,10 +1,12 @@
 package com.example.hackertronix.firebaseauthtest.utils;
 
+import java.util.Random;
+
 /**
  * Created by hackertronix on 18/03/17.
  */
 
-public class API {
+public class Utils {
 
     public static final String API_ENDPOINT= "http://unsplash.it/list";
 
@@ -36,6 +38,43 @@ public class API {
     };
 
 
+    public static int[] getRandomInts()
+    {
+        int max_range = 1085;
+        int randomInts[] = new int[100];
+
+        Random random = new Random();
+
+        for (int i =0 ; i <100; i++)
+        {
+            int num = random.nextInt(max_range);
+            if(num == 0)
+            {
+                num = doAgain(num);
+            }
+
+            else {
+                randomInts[i]=num;
+            }
+        }
+
+        return randomInts;
+
+    }
+
+    private static int doAgain( int num) {
+
+        Random random = new Random();
+
+        num = random.nextInt(1085);
+
+        while(num==0)
+        {
+            doAgain(num);
+        }
+
+        return num;
+    }
 
 
 }

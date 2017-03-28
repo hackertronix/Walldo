@@ -4,19 +4,15 @@ import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.v4.app.TaskStackBuilder;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 import com.example.hackertronix.firebaseauthtest.Favorites;
 import com.example.hackertronix.firebaseauthtest.R;
-import com.example.hackertronix.firebaseauthtest.utils.API;
 
 /**
  * Created by hackertronix on 20/03/17.

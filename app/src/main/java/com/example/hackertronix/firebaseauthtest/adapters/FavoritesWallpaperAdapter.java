@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -16,7 +15,7 @@ import com.example.hackertronix.firebaseauthtest.FullScreenImage;
 import com.example.hackertronix.firebaseauthtest.R;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
-import com.example.hackertronix.firebaseauthtest.utils.API;
+import com.example.hackertronix.firebaseauthtest.utils.Utils;
 
 /**
  * Created by hackertronix on 20/03/17.
@@ -123,7 +122,7 @@ public class FavoritesWallpaperAdapter extends RecyclerView.Adapter<FavoritesWal
         public void bind(Wallpaper wallpaper) {
 
            mWallpaper = wallpaper;
-            Glide.with(mContext).load(API.LIST_IMAGE_ENDPOINT+String.valueOf(mWallpaper.getId()))
+            Glide.with(mContext).load(Utils.LIST_IMAGE_ENDPOINT+String.valueOf(mWallpaper.getId()))
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.error)
                     .placeholder(R.drawable.placeholder)

@@ -10,19 +10,15 @@ import android.os.Binder;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hackertronix.firebaseauthtest.R;
-import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
-import com.example.hackertronix.firebaseauthtest.utils.API;
+import com.example.hackertronix.firebaseauthtest.utils.Utils;
 
-import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
@@ -126,7 +122,7 @@ public class FavoriteWidgetService extends RemoteViewsService {
 
                 try {
 
-                    Bitmap bitmap = Glide.with(context).load(API.WIDGET_IMAGE_ENDPOINT+String.valueOf(id))
+                    Bitmap bitmap = Glide.with(context).load(Utils.WIDGET_IMAGE_ENDPOINT+String.valueOf(id))
                             .asBitmap()
                             .into(40,40)
                             .get();

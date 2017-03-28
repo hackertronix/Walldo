@@ -1,18 +1,17 @@
 package com.example.hackertronix.firebaseauthtest;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +21,7 @@ import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 import com.example.hackertronix.firebaseauthtest.network.JSONParser;
 import com.example.hackertronix.firebaseauthtest.network.NetworkUtils;
 
-import com.example.hackertronix.firebaseauthtest.utils.API;
+import com.example.hackertronix.firebaseauthtest.utils.Utils;
 
 import org.json.JSONException;
 
@@ -122,9 +121,9 @@ public class Browse extends AppCompatActivity  {
     private String getRandomMessage() {
         Random random= new Random();
 
-        int index = random.nextInt(API.PROGRESS_DIALOG_MESSAGES.length);
+        int index = random.nextInt(Utils.PROGRESS_DIALOG_MESSAGES.length);
 
-        return API.PROGRESS_DIALOG_MESSAGES[index];
+        return Utils.PROGRESS_DIALOG_MESSAGES[index];
     }
 
 
@@ -137,7 +136,8 @@ public class Browse extends AppCompatActivity  {
 
 
             try {
-                 response = NetworkUtils.getResponseFromUnsplash(API.API_ENDPOINT);
+                 response = NetworkUtils.getResponseFromUnsplash(Utils.API_ENDPOINT);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

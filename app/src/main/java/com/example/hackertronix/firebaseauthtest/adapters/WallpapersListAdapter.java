@@ -7,15 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.hackertronix.firebaseauthtest.Browse;
 import com.example.hackertronix.firebaseauthtest.FullScreenImage;
 import com.example.hackertronix.firebaseauthtest.R;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
-import com.example.hackertronix.firebaseauthtest.utils.API;
+import com.example.hackertronix.firebaseauthtest.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -75,7 +73,7 @@ public class WallpapersListAdapter extends RecyclerView.Adapter<WallpapersListAd
 
 
             mWallpaper=wallpaper;
-            Glide.with(mContext).load(API.LIST_IMAGE_ENDPOINT+String.valueOf(mWallpaper.getId()))
+            Glide.with(mContext).load(Utils.LIST_IMAGE_ENDPOINT+String.valueOf(mWallpaper.getId()))
                     .error(R.drawable.error)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.placeholder)

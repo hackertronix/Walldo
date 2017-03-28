@@ -2,7 +2,6 @@ package com.example.hackertronix.firebaseauthtest;
 
 import android.app.WallpaperManager;
 import android.appwidget.AppWidgetManager;
-import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -17,25 +16,16 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Parcelable;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -44,7 +34,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
-import com.example.hackertronix.firebaseauthtest.utils.API;
+import com.example.hackertronix.firebaseauthtest.utils.Utils;
 import com.example.hackertronix.firebaseauthtest.database.FavoriteWallpaperContract.FavoriteWallpaperEntry;
 import com.example.hackertronix.firebaseauthtest.widget.FavoriteWidgetProvider;
 
@@ -114,7 +104,7 @@ public class FullScreenImage extends AppCompatActivity {
         artistTextView.setContentDescription("This image was photographed by "+wallpaper.getAuthor());
 
 
-        Glide.with(this).load(API.FULL_RES_IMAGE_ENDPOINT+ width+"/"+height+"?image="+String.valueOf(wallpaper.getId()))
+        Glide.with(this).load(Utils.FULL_RES_IMAGE_ENDPOINT+ width+"/"+height+"?image="+String.valueOf(wallpaper.getId()))
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .listener(new RequestListener<String, Bitmap>() {
