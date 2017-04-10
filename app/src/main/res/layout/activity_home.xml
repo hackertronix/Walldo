@@ -6,24 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.example.hackertronix.firebaseauthtest.Home">
-
-
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/home_bg"
-        android:scaleType="fitXY"/>
+    tools:context="com.example.hackertronix.firebaseauthtest.Home"
+    android:background="@drawable/animation_list"
+    android:id="@+id/home_frameLayout">
 
     <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
-    tools:context="com.example.hackertronix.firebaseauthtest.Home"
-    >
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context="com.example.hackertronix.firebaseauthtest.Home">
 
 
         <android.support.v7.widget.Toolbar
@@ -43,19 +37,23 @@
         android:layout_gravity="center"
         android:layout_marginTop="34dp"
         android:textSize="62sp"
+        android:shadowColor="#474747"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="50"
         android:textColor="#fff"/>
 
         <Button
             style="@style/ButtonStyle"
             android:text="@string/browse"
-            android:textColor="#2D37A9"
+            android:textColor="#BD3F32"
             android:id="@+id/browse_btn"
             android:layout_marginTop="105dp"
             android:layout_gravity="center_horizontal" />
         <Button
             style="@style/ButtonStyle"
             android:text="@string/favourites"
-            android:textColor="#2D37A9"
+            android:textColor="#BD3F32"
             android:id="@+id/favourites_btn"
             android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal" />

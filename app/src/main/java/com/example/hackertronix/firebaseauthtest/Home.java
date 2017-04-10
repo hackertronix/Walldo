@@ -3,6 +3,7 @@ package com.example.hackertronix.firebaseauthtest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -21,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Home extends AppCompatActivity {
 
     private TextView mStatusTextView;
+    private FrameLayout frameLayout;
 
     private FirebaseAnalytics mFirebaseAnalytics;
     private FirebaseAuth mAuth;
@@ -31,6 +34,7 @@ public class Home extends AppCompatActivity {
     private Typeface GothamRounded;
 
     private Button mBrowseButton,mFavouritesButton;
+    private AnimationDrawable animationDrawable;
 
 
     @Override
@@ -40,6 +44,13 @@ public class Home extends AppCompatActivity {
 
         mStatusTextView=(TextView)findViewById(R.id.status_textview);
         toolbar=(Toolbar)findViewById(R.id.toolBar);
+        frameLayout=(FrameLayout)findViewById(R.id.home_frameLayout);
+
+
+        animationDrawable = (AnimationDrawable)frameLayout.getBackground();
+
+        animationDrawable.setEnterFadeDuration(5000);
+        animationDrawable.setExitFadeDuration(5000);
 
         mBrowseButton=(Button)findViewById(R.id.browse_btn);
         mFavouritesButton=(Button)findViewById(R.id.favourites_btn);
@@ -54,9 +65,14 @@ public class Home extends AppCompatActivity {
 
         mBrowseButton.setTypeface(GothamRounded);
         mFavouritesButton.setTypeface(GothamRounded);
+        if(Build.VERSION.SDK_INT>=21) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
 
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(Color.parseColor("#303F9F"));
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            getWindow().setNavigationBarColor(Color.TRANSPARENT);
         }
 
         mStatusTextView.setTypeface(SFUI);
@@ -166,4 +182,9 @@ public class Home extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        animationDrawable.start();
+    }
 }
