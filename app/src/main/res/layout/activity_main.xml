@@ -7,10 +7,12 @@
     tools:context="com.example.hackertronix.firebaseauthtest.MainActivity">
 
    <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/signin_bg"
-    android:scaleType="centerCrop"/>
+       android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:id="@+id/bannerView"
+       android:src="@drawable/signin_bg"
+       android:scaleType="fitCenter"
+    />
 
     <RelativeLayout
         android:layout_width="match_parent"

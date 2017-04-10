@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private Button mSigninButton;
+    private ImageView BannerImageView;
     private ProgressDialog progressDialog;
 
 
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BannerImageView= (ImageView)findViewById(R.id.bannerView);
         titleTextView=(TextView)findViewById(R.id.title_tv);
 
         Fabric.with(this, new Crashlytics());
