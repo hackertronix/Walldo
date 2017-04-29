@@ -51,6 +51,7 @@ public class Home extends AppCompatActivity {
 
         animationDrawable.setEnterFadeDuration(5000);
         animationDrawable.setExitFadeDuration(5000);
+        animationDrawable.start();
 
         mBrowseButton=(Button)findViewById(R.id.browse_btn);
         mFavouritesButton=(Button)findViewById(R.id.favourites_btn);
@@ -182,9 +183,8 @@ public class Home extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        animationDrawable.start();
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//    }
 }

@@ -40,7 +40,7 @@
         android:shadowColor="#474747"
         android:shadowDx="2"
         android:shadowDy="2"
-        android:shadowRadius="50"
+        android:shadowRadius="10"
         android:textColor="#fff"/>
 
         <Button
