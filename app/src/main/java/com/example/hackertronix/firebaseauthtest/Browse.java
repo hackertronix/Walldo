@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,16 +18,17 @@ import android.widget.Toast;
 
 import com.example.hackertronix.firebaseauthtest.adapters.WallpapersListAdapter;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
-import com.example.hackertronix.firebaseauthtest.network.JSONParser;
-import com.example.hackertronix.firebaseauthtest.network.NetworkUtils;
 
+import com.example.hackertronix.firebaseauthtest.network.UnsplashClient;
 import com.example.hackertronix.firebaseauthtest.utils.Utils;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Browse extends AppCompatActivity  {
 
@@ -56,6 +57,7 @@ public class Browse extends AppCompatActivity  {
 
         wallpapersRecyclerView=(RecyclerView)findViewById(R.id.wallpaper_recyclerview);
 
+        Wallpapers= new ArrayList<>();
         handleOrientation();
 
 
@@ -105,7 +107,7 @@ public class Browse extends AppCompatActivity  {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(WALLPAPERS_ARRAY,Wallpapers);
+        outState.putParcelableArrayList(WALLPAPERS_ARRAY, Wallpapers);
         super.onSaveInstanceState(outState);
     }
 
@@ -114,9 +116,33 @@ public class Browse extends AppCompatActivity  {
         progressDialog.setMessage(getRandomMessage());
         progressDialog.show();
 
-        new UnsplashQueryTask().execute();
+        UnsplashClient unsplashClient = UnsplashClient.retrofit.create(UnsplashClient.class);
+        Call<List<Wallpaper>> call = unsplashClient.getWallpaperData();
+
+        call.enqueue(new Callback<List<Wallpaper>>() {
+            @Override
+            public void onResponse(Call<List<Wallpaper>> call, Response<List<Wallpaper>> response) {
+
+                Log.d("TAG",response.body().toString());
+                Wallpapers = (ArrayList<Wallpaper>) response.body();
+                handleRecyclerView(Wallpapers);
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<Wallpaper>> call, Throwable throwable) {
+                Toast.makeText(Browse.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
+
+    private void handleRecyclerView(ArrayList<Wallpaper> wallpapers) {
+        mAdapter = new WallpapersListAdapter(wallpapers,this);
+        wallpapersRecyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
+    }
+
 
     private String getRandomMessage() {
         Random random= new Random();
@@ -127,46 +153,4 @@ public class Browse extends AppCompatActivity  {
     }
 
 
-    private class UnsplashQueryTask extends AsyncTask<Void, Void, String>{
-
-        private String response;
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-
-            try {
-                 response = NetworkUtils.getResponseFromUnsplash(Utils.API_ENDPOINT);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            progressDialog.dismiss();
-            
-            if (response != null && !response.equals("")) {
-
-                try {
-                    Wallpapers = JSONParser.parseWallpapperData(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                mAdapter= new WallpapersListAdapter(Wallpapers,getApplicationContext());
-                wallpapersRecyclerView.setAdapter(mAdapter);
-
-                mAdapter.notifyDataSetChanged();
-
-            }
-            
-            else {
-                Toast.makeText(Browse.this, R.string.error_occured, Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }

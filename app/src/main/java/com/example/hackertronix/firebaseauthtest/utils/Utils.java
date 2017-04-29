@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Utils {
 
-    public static final String API_ENDPOINT= "http://unsplash.it/list";
+    public static final String API_ENDPOINT= "http://unsplash.it";
 
     public static final String WIDTH="500";
     public static final String HEIGHT="750";
