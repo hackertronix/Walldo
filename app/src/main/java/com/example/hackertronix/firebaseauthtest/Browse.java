@@ -5,7 +5,6 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 import com.example.hackertronix.firebaseauthtest.adapters.WallpapersListAdapter;
 import com.example.hackertronix.firebaseauthtest.model.Wallpaper;
 
-import com.example.hackertronix.firebaseauthtest.network.UnsplashClient;
+import com.example.hackertronix.firebaseauthtest.network.UnsplashService;
 import com.example.hackertronix.firebaseauthtest.utils.Utils;
 
 import java.util.ArrayList;
@@ -116,8 +115,8 @@ public class Browse extends AppCompatActivity  {
         progressDialog.setMessage(getRandomMessage());
         progressDialog.show();
 
-        UnsplashClient unsplashClient = UnsplashClient.retrofit.create(UnsplashClient.class);
-        Call<List<Wallpaper>> call = unsplashClient.getWallpaperData();
+        UnsplashService unsplashService = UnsplashService.retrofit.create(UnsplashService.class);
+        Call<List<Wallpaper>> call = unsplashService.getWallpaperData();
 
         call.enqueue(new Callback<List<Wallpaper>>() {
             @Override
