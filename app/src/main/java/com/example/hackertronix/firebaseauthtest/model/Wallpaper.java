@@ -3,11 +3,13 @@ package com.example.hackertronix.firebaseauthtest.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by hackertronix on 18/03/17.
  */
 
-public class Wallpaper implements Parcelable {
+public class Wallpaper extends RealmObject implements Parcelable {
 
     private String format;
     private String filename;
